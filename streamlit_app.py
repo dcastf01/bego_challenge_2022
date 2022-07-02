@@ -7,6 +7,7 @@ import pandas as pd
 import numpy as np
 import glob
 import os
+import spacy
 st.set_page_config(layout='centered', page_icon='🎓', page_title='Diploma Generator')
 st.title('🎓 Diploma PDF Generator')
 
@@ -16,19 +17,29 @@ st.write(
 
 # left, right = st.columns(2)
 
-# Books present
-books = sorted(glob.glob(os.path.join('data','harrypotter','*.txt')))
-
-print ('Available Books: \n')
-for i in books:
-    print (i.split(os.sep)[2].split('_')[0].split('.')[0])
-
-
+# Books from https://github.com/formcept/whiteboard
+hp_books = sorted(glob.glob(os.path.join('data','harrypotter','*.txt')))
+hp_books_name_clean={book:book.split(os.sep)[2].split('_')[0].split('.')[0] for book in hp_books}
 df = pd.DataFrame(
     np.random.randn(50, 20),
     columns=('col %d' % i for i in range(20)))
+
 st.write('Here is the template we will be using:')
-st.selectbox('Choose the correct template to solve the challenge',['a','b','c','d'])
+book_selected=st.selectbox('Choose the correct template to solve the challenge',hp_books_name_clean)
+
+book_text=open(book_selected,encoding="utf-8").read()
+# text=
+# df=
+# Load spacy English languague model
+NER = spacy.load("en_core_web_sm")
+sent_entity_df = []
+book_doc = NER(book_text)
+# Loop through sentences, store named entity list for each sentence
+for sent in book_doc.sents:
+    entity_list = [ent.text for ent in sent.ents]
+    sent_entity_df.append({"sentence": sent, "entities": entity_list})
+    
+df = pd.DataFrame(sent_entity_df)
 st.dataframe(df)
 
 env = Environment(loader=FileSystemLoader('.'), autoescape=select_autoescape())
