@@ -19,45 +19,52 @@ df = pd.DataFrame(
     np.random.randn(50, 20),
     columns=('col %d' % i for i in range(20)))
 st.write("Here's the template we'll be using:")
-st.selectbox('Elige la plantilla correcta para resolver el challenge',['a','b','c','d'])
+st.selectbox('Choose the correct template to solve the challenge',['a','b','c','d'])
 st.dataframe(df)
 
 env = Environment(loader=FileSystemLoader("."), autoescape=select_autoescape())
 template = env.get_template("template.html")
 
+st.write('Insert the answer')
+answer_form = st.form("template_form")
+answer = answer_form.text_input("Only write here if you are sure about the answer, be careful") 
+answer_submit = answer_form.form_submit_button("Are you sure that you know the answer?")
+if answer_submit:
+    if answer=='a':
+        st.balloons()
+        st.success("Congratulations!!!")
+        
+        st.write("Fill in the data:")
+        name_form = st.form("name_form")
+        winner = name_form.text_input("Winner name")
 
-st.write("Fill in the data:")
-form = st.form("template_form")
-winner = form.text_input("Winner name")
-# course = form.selectbox(
-#     "Choose course",
-#     ["Report Generation in Streamlit", "Advanced Cryptography"],
-#     index=0,
-# )
-# grade = form.slider("Grade", 1, 100, 60)
-submit = form.form_submit_button("Generate PDF")
+        name_submit = name_form.form_submit_button("Generate PDF")
 
-# submit=True
+        # submit=True
 
-# winner='BEGO'
+        # winner='BEGO'
 
-## we generate the certificate
-if submit:
-    html = template.render(
-        winner=winner,
-        date=date.today().strftime("%B %d, %Y"),
-    )
-    path_wkhtmltopdf = r'D:\programacion\Repositorios\bego_challenge_2022\whkhtml\wkhtmltopdf\bin\wkhtmltopdf.exe'
-    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf,)
-    pdf = pdfkit.from_string(html, False,configuration=config)
-    st.balloons()
+        ## we generate the certificate
+        if name_submit:
+            html = template.render(
+                winner=winner,
+                date=date.today().strftime("%B %d, %Y"),
+            )
+            path_wkhtmltopdf = r'D:\programacion\Repositorios\bego_challenge_2022\whkhtml\wkhtmltopdf\bin\wkhtmltopdf.exe'
+            config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf,)
+            pdf = pdfkit.from_string(html, False,configuration=config)
+            st.balloons()
 
-    st.success("🎉 Your diploma was generated!")
-    # st.write(html, unsafe_allow_html=True)
-    # st.write("")
-    st.download_button(
-        "⬇️ Download PDF",
-        data=pdf,
-        file_name="diploma.pdf",
-        mime="application/octet-stream",
-    )
+            st.success("🎉 Your diploma was generated!")
+            # st.write(html, unsafe_allow_html=True)
+            # st.write("")
+            st.download_button(
+                "⬇️ Download PDF",
+                data=pdf,
+                file_name="diploma.pdf",
+                mime="application/octet-stream",
+            )
+
+    else:
+        st.error('This is an error')
+        st.stop()
