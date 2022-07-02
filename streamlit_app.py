@@ -12,22 +12,22 @@ st.write(
     "This app is a challenge for my girlfriend to get her birthday present"
 )
 
-left, right = st.columns(2)
+# left, right = st.columns(2)
 
 
 df = pd.DataFrame(
     np.random.randn(50, 20),
     columns=('col %d' % i for i in range(20)))
-right.write("Here's the template we'll be using:")
-right.selectbox('Elige la plantilla correcta para resolver el challenge',['a','b','c','d'])
-right.dataframe(df)
+st.write("Here's the template we'll be using:")
+st.selectbox('Elige la plantilla correcta para resolver el challenge',['a','b','c','d'])
+st.dataframe(df)
 
 env = Environment(loader=FileSystemLoader("."), autoescape=select_autoescape())
 template = env.get_template("template.html")
 
 
-left.write("Fill in the data:")
-form = left.form("template_form")
+st.write("Fill in the data:")
+form = st.form("template_form")
 winner = form.text_input("Winner name")
 # course = form.selectbox(
 #     "Choose course",
@@ -52,10 +52,10 @@ if submit:
     pdf = pdfkit.from_string(html, False,configuration=config)
     st.balloons()
 
-    right.success("🎉 Your diploma was generated!")
+    st.success("🎉 Your diploma was generated!")
     # st.write(html, unsafe_allow_html=True)
     # st.write("")
-    right.download_button(
+    st.download_button(
         "⬇️ Download PDF",
         data=pdf,
         file_name="diploma.pdf",
