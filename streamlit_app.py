@@ -9,7 +9,12 @@ import glob
 import os
 import nltk
 
-nltk.download('punkt')
+
+
+# if not  nltk.find('tokenizers/punkt.zip'):
+download_dir_nlkt_tokenizer=os.path.join('data','nlkt_model','punkt.zip')
+if not os.path.exists(download_dir_nlkt_tokenizer):
+    nltk.download('punkt',download_dir_nlkt_tokenizer)
     
 
 st.set_page_config(layout='centered', page_icon='🎓', page_title='Diploma Generator')
@@ -34,14 +39,12 @@ book_text=open(book_selected,encoding="utf-8").read()
 # df=
 # Load spacy English languague model
 
-    
-df = pd.DataFrame(nltk.tokenize.sent_tokenize(book_text, language='english')
-)
+#create a selector choosen the row
+df = pd.DataFrame(nltk.tokenize.sent_tokenize(book_text, language='english'))
+
+
+
 st.dataframe(df)
-
-env = Environment(loader=FileSystemLoader('.'), autoescape=select_autoescape())
-template = env.get_template('template.html')
-
 st.write('Insert the answer')
 answer_form = st.form('template_form')
 answer = answer_form.text_input(
@@ -67,6 +70,8 @@ if answer_submit:
 
         ## we generate the certificate
         if name_submit:
+            env = Environment(loader=FileSystemLoader('.'), autoescape=select_autoescape())
+            template = env.get_template('template.html')
             html = template.render(
                 winner=winner,
                 date=date.today().strftime('%B %d, %Y'),
