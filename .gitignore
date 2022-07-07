@@ -129,4 +129,5 @@ dmypy.json
 .pyre/
 
 whkhtml/
-wkhtmltox/
+wkhtmltox
+data/nlkt_model/
