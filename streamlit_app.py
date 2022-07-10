@@ -115,7 +115,7 @@ hp_books = sorted(glob.glob(os.path.join('data','harrypotter','*.txt')))
 hp_books_name_clean={book:book.split(os.sep)[2].split('_')[0].split('.')[0] for book in hp_books}
 
 st.write('Here is the template we will be using:')
-book_selected=st.selectbox('Choose the correct template to solve the challenge',hp_books_name_clean)
+book_selected=st.selectbox('Choose the correct template to solve the challenge',hp_books_name_clean.values())
 
 book_text=open(book_selected,encoding="utf-8").read()
 if 'alohomora' in book_text:
