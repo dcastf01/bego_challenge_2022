@@ -21,11 +21,12 @@ if not os.path.exists(download_dir_nlkt_tokenizer):
     nltk.download('punkt',download_dir_nlkt_tokenizer)
     
 st.set_page_config(layout='centered', page_icon='💖', page_title='Diploma Generator')
-st.title('💖 Diploma PDF Generator')
+st.title('💖 Voucher gift PDF Generator')
 
 st.write(
     'This app is a challenge for my girlfriend to get her birthday present'
 )
+st.subheader('Challenges!!')
 col1, col2, col3 = st.columns(3)
 with col1:
     st.write('First challenge: book')
