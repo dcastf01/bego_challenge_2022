@@ -112,12 +112,12 @@ with col3:
 ###Second challenge###
 # Books from https://github.com/formcept/whiteboard
 hp_books = sorted(glob.glob(os.path.join('data','harrypotter','*.txt')))
-hp_books_name_clean={book:book.split(os.sep)[2].split('_')[0].split('.')[0] for book in hp_books}
+hp_books_name_clean={book.split(os.sep)[2].split('_')[0].split('.')[0]:book for book in hp_books}
 
 st.write('Here is the template we will be using:')
-book_selected=st.selectbox('Choose the correct template to solve the challenge',hp_books_name_clean.values())
+book_selected=st.selectbox('Choose the correct template to solve the challenge',hp_books_name_clean.keys())
 
-book_text=open(book_selected,encoding="utf-8").read()
+book_text=open(hp_books_name_clean[book_selected],encoding="utf-8").read()
 if 'alohomora' in book_text:
     print('yes')
 df = pd.DataFrame(nltk.tokenize.sent_tokenize(book_text, language='english'))
