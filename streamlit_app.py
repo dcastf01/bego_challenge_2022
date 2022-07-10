@@ -118,11 +118,16 @@ st.write('Here is the template we will be using:')
 book_selected=st.selectbox('Choose the correct template to solve the challenge',hp_books_name_clean.keys())
 
 book_text=open(hp_books_name_clean[book_selected],encoding="utf-8").read()
-if 'alohomora' in book_text:
+if '“Alohomora' in book_text:
     print('yes')
 df = pd.DataFrame(nltk.tokenize.sent_tokenize(book_text, language='english'))
+df.rename({0:'sentences'},inplace=True,axis=1)
 
-st.dataframe(df)
+sentences_to_show=st.number_input('do you know what is the sentences?',min_value=0,max_value=df.shape[0])
+if sentences_to_show:
+    st.dataframe(df.iloc[sentences_to_show])
+else:
+    st.dataframe(df)
 st.write('Insert here the final key to unlock the prize')
 challenge_harry_potter_form = st.form('challenge_harry_potter_form')
 hp_answer = challenge_harry_potter_form.text_input(
@@ -132,7 +137,7 @@ hp_answer_submit = challenge_harry_potter_form.form_submit_button(
     'Are you sure that you know the answer? testing'
     )
 
-#hacer que escriba la plabra alohomora para ello tiene que encontrarla en el libro 5 
+#hacer que escriba la plabra alohomora para ello tiene que encontrarla en el libro 5  sentences 2527 y palabra 10
 #para ello tengo que pner ciertas pistas, donde una es libro, otra la frase y la otra el numero de la palbra
 # quizá las preguntas son con sumas o cosas varias
 if hp_answer_submit:
