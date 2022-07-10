@@ -116,13 +116,20 @@ hp_books_name_clean={book.split(os.sep)[2].split('_')[0].split('.')[0]:book for 
 
 st.write('Here is the template we will be using:')
 book_selected=st.selectbox('Choose the correct template to solve the challenge',hp_books_name_clean.keys())
+book_path=hp_books_name_clean[book_selected]
 
-book_text=open(hp_books_name_clean[book_selected],encoding="utf-8").read()
+@st.cache
+def generate_df(book_path):
+    book_text=open(book_path,encoding="utf-8").read()
+    df = pd.DataFrame(nltk.tokenize.sent_tokenize(book_text, language='english'))
+    df.rename({0:'sentences'},inplace=True,axis=1)
+    return df
 
-df = pd.DataFrame(nltk.tokenize.sent_tokenize(book_text, language='english'))
-df.rename({0:'sentences'},inplace=True,axis=1)
+df=generate_df(book_path)
+
 
 sentences_to_show=st.number_input('do you know what is the sentences?',min_value=0,max_value=df.shape[0])
+
 if sentences_to_show:
     st.dataframe(df.iloc[sentences_to_show])
 else:
