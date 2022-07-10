@@ -43,7 +43,7 @@ with col1:
             image = Image.open(image_path)
 
             st.image(image, caption="to prove it's true")
-            st.markdown('*The number is a key*')
+            st.markdown('*aquí poner el libro que toque*')
 with col2:
     st.write(
         'Second challenge: line'
@@ -65,43 +65,49 @@ with col2:
         ('choose wisely',*list_of_options_second))
 
     if option_second != 'choose wisely':
-        if option_first!=1:
+        if option_second!='Sorting hat':
             error_submit()
         else:
             st.write('Well Done')
            
-            st.markdown('*The second word is the key*')
+            st.markdown('*aqui poner la linea que toque*')
 
 with col3:
     st.write(
         'Third challenge: word'
     )
-    list_of_options_secnd=[
-        'Thestral',
-        'Acromántula',
-        'Horned Serpent',
-        'Basilisk',
-        'Sorting hat',
-        'Centaur',
-        'Chimaera',
-        ]
-    option_second = st.selectbox(
-       """Year after year
-        the students are testing me
-        and i told them
-        in which house will they be studying""",
-        ('choose wisely',*range(0,5)))
 
-    if option_second != 'choose wisely':
-        if option_first!=1:
+    image_path=os.path.join('data','assets','bleach.png')
+    image = Image.open(image_path)
+
+    st.image(image, caption="to prove it's true")
+    list_of_options_third=[
+        'Naruto',
+        'Naruto: Shippuden'
+        'Full Metal Alchemist',
+        'My Hero Academia',
+        'One Piece',
+        'Sword Art Online',
+        'Kimetsu No Yaiba',
+        'Shaman king',
+        'Haikyu',
+        'shingeky no Kyojin',
+        'Bleach',
+        'Fairy Tail',
+        'Nanatsu No Taizai',
+        ]
+    option_third = st.selectbox(
+       'From which anime is the image?',
+        ('choose wisely',*list_of_options_third))
+
+    if option_third != 'choose wisely':
+        if option_third!='Bleach':
             error_submit()
         else:
             st.write('Well Done')
            
-            st.markdown('*The second word is the key*') 
+            st.markdown('*aquí poner la palabra que toque*') 
 
-st.write('select the correct keys')
-st.multiselect
 ###Second challenge###
 # Books from https://github.com/formcept/whiteboard
 hp_books = sorted(glob.glob(os.path.join('data','harrypotter','*.txt')))
