@@ -40,30 +40,21 @@ if option_first != 'choose wisely':
     else:
         st.write('Well Done')
         image_path=os.path.join('data','assets','circular room.jpg')
-        image = Image.open('sunrise.jpg')
+        image = Image.open(image_path)
 
         st.image(image, caption="to prove it's true")
-st.write(
-    'First challenge: line'
-)
+        st.markdown('*The number is a key*')
 
 st.write(
-    'minimum number of walls needed in a house'
-)
-st.write(
-    'First challenge: word'
+    'Second challenge: line'
 )
 
+
 st.write(
-    'minimum number of walls needed in a house'
+    'Third challenge: word'
 )
-challenge_harry_potter_form = st.form('challenge_harry_potter_form')
-hp_answer = challenge_harry_potter_form.text_input(
-    'What do you call a wizard in Wonderland?'
-    ) 
-hp_answer_submit = challenge_harry_potter_form.form_submit_button(
-    'Are you sure that you know the answer? testing'
-    )
+
+
 
 
 ###Second challenge###
@@ -92,7 +83,7 @@ hp_answer_submit = challenge_harry_potter_form.form_submit_button(
 #hacer que escriba la plabra alohomora para ello tiene que encontrarla en el libro 5 
 #para ello tengo que pner ciertas pistas, donde una es libro, otra la frase y la otra el numero de la palbra
 # quizá las preguntas son con sumas o cosas varias
-if hp_answer_submit and first_answer_submit:
+if hp_answer_submit:
     if hp_answer=='a':
         st.balloons()
         st.success('Congratulations!!!')
