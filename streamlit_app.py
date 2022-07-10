@@ -44,7 +44,7 @@ with col1:
             image = Image.open(image_path)
 
             st.image(image, caption="to prove it's true")
-            st.markdown('*aquí poner el libro que toque*')
+            st.markdown('*5*')
 with col2:
     st.write(
         'Second challenge: line'
@@ -71,7 +71,7 @@ with col2:
         else:
             st.write('Well Done')
            
-            st.markdown('*aqui poner la linea que toque*')
+            st.markdown('*2527*')
 
 with col3:
     st.write(
@@ -107,7 +107,7 @@ with col3:
         else:
             st.write('Well Done')
            
-            st.markdown('*aquí poner la palabra que toque*') 
+            st.markdown('*10*') 
 
 ###Second challenge###
 # Books from https://github.com/formcept/whiteboard
@@ -140,7 +140,7 @@ hp_answer_submit = challenge_harry_potter_form.form_submit_button(
 #para ello tengo que pner ciertas pistas, donde una es libro, otra la frase y la otra el numero de la palbra
 # quizá las preguntas son con sumas o cosas varias
 if hp_answer_submit:
-    if hp_answer=='a':
+    if hp_answer=='Alohomora':
         st.balloons()
         st.success('Congratulations!!!')
         
