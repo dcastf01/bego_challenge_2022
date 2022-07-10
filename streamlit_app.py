@@ -118,8 +118,7 @@ st.write('Here is the template we will be using:')
 book_selected=st.selectbox('Choose the correct template to solve the challenge',hp_books_name_clean.keys())
 
 book_text=open(hp_books_name_clean[book_selected],encoding="utf-8").read()
-if '“Alohomora' in book_text:
-    print('yes')
+
 df = pd.DataFrame(nltk.tokenize.sent_tokenize(book_text, language='english'))
 df.rename({0:'sentences'},inplace=True,axis=1)
 
